@@ -55,15 +55,19 @@ void listarContatos(Agenda A)
     int i;
     for (i = A.primeiro; i < A.ultimo; i++)
     {
-        printf("%s %s\n", A.Contato[i].nome, A.Contato[i].numeroTelefone);
+        printf("Contato %d", i+1);
+        printf("\nNome: %s\n", A.Contato[i].nome);
+        printf("Numero: %s\n", A.Contato[i].numeroTelefone);
+        printf("-----------------------------------\n");
     }
     system("pause");
+    system("cls");
 }
 
 void pesquisarContato(Agenda *A, char name[])
 {
-
-    for (int i = A->primeiro; i < A->ultimo; i++)
+    int i;
+    for (i = A->primeiro; i < A->ultimo; i++)
     {
         if (strcmp(A->Contato[i].nome, name) == 0)
         {
@@ -76,14 +80,14 @@ void pesquisarContato(Agenda *A, char name[])
         }
     }
 
-    printf("Contato não encontrado!\n");
+    printf("Contato nao encontrado!\n");
     system("pause");
 }
 
 void deletarContato(Agenda *A, char nome[])
 {
-    int posicao = -1;
-    for (int i = 0; i < A->ultimo; i++)
+    int posicao = -1, i;
+    for (i = 0; i < A->ultimo; i++)
     {
         if (strcmp(A->Contato[i].nome, nome) == 0)
         {
@@ -97,7 +101,8 @@ void deletarContato(Agenda *A, char nome[])
     }
     else
     {
-        for (int i = posicao; i < A->ultimo - 1; i++)
+        int i;
+        for (i = posicao; i < A->ultimo - 1; i++)
         {
             A->Contato[i] = A->Contato[i + 1];
         }
@@ -110,9 +115,10 @@ void deletarContato(Agenda *A, char nome[])
 
 void ordenarAlfabeticamente(Agenda *agenda)
 {
-    for (int i = 0; i < agenda->ultimo - 1; i++)
+    int j, i;
+    for (i = 0; i < agenda->ultimo - 1; i++)
     {
-        for (int j = 0; j < agenda->ultimo - i - 1; j++)
+        for (j = 0; j < agenda->ultimo - i - 1; j++)
         {
             if (strcmp(agenda->Contato[j].nome, agenda->Contato[j + 1].nome) > 0)
             {
@@ -126,7 +132,7 @@ void ordenarAlfabeticamente(Agenda *agenda)
 
 int main()
 {
-    setlocale(LC_ALL, "");
+    setlocale(LC_ALL, "Portuguese");
     Agenda agenda;
     Contato contato;
     iniciar(&agenda);
@@ -169,7 +175,7 @@ int main()
             break;
         case 2:
             // char nome2[30];
-            printf("Digite o nome que será pesquisado: ");
+            printf("Digite o nome que sera pesquisado: ");
             scanf("%s", &nome);
             system("cls");
             pesquisarContato(&agenda, nome);
